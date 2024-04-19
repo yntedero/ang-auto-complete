@@ -1,1 +1,8 @@
-<p>autocomplete works!</p>
+<div class="autocomplete-container">
+  <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Type to search...">
+  <ul *ngIf="filteredOptions.length > 0">
+    <li *ngFor="let option of filteredOptions" (click)="selectOption(option)">
+      {{ option }}
+    </li>
+  </ul>
+</div>
