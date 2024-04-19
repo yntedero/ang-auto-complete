@@ -1,8 +1,9 @@
-<div class="autocomplete-container">
-  <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Type to search...">
-  <ul *ngIf="filteredOptions.length > 0">
+<div class="autocomplete-container" [class.disabled]="disabled">
+  <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" [disabled]="disabled" placeholder="Type to search...">
+  <ul *ngIf="!loading && filteredOptions.length > 0">
     <li *ngFor="let option of filteredOptions" (click)="selectOption(option)">
       {{ option }}
     </li>
   </ul>
+  <div *ngIf="loading">Loading...</div>
 </div>

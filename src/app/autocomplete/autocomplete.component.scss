@@ -1,6 +1,10 @@
 .autocomplete-container {
   position: relative;
   width: 300px;
+  &.disabled input {
+    background-color: #eee;
+    cursor: not-allowed;
+  }
 }
 
 input[type="text"] {
