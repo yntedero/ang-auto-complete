@@ -13,8 +13,9 @@ import { NgForOf, NgIf } from "@angular/common";
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss']
 })
+
 export class AutocompleteComponent {
-  @Input() options: string[] = [];
+  @Input() options: string[] = ['Apple', 'Banana', 'Cherry'];
   @Input() disabled: boolean = false;
   @Input() loading: boolean = false;
   @Input() filterPredicate: (option: string, searchTerm: string) => boolean = (option, searchTerm) => option.toLowerCase().includes(searchTerm.toLowerCase());
