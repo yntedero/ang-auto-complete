@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { NgForOf, NgIf } from "@angular/common";
+import { AppOptionComponent } from './app-option/app-option.component';
 
 @Component({
   selector: 'app-autocomplete',
@@ -13,9 +14,8 @@ import { NgForOf, NgIf } from "@angular/common";
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss']
 })
-
-export class AutocompleteComponent {
-  @Input() options: string[] = ['Apple', 'Banana', 'Cherry'];
+export class AutocompleteComponent implements AfterContentInit {
+  @Input() options: string[] = [];
   @Input() disabled: boolean = false;
   @Input() loading: boolean = false;
   @Input() filterPredicate: (option: string, searchTerm: string) => boolean = (option, searchTerm) => option.toLowerCase().includes(searchTerm.toLowerCase());
@@ -23,10 +23,16 @@ export class AutocompleteComponent {
 
   @Output() search = new EventEmitter<string>();
 
+  @ContentChildren(AppOptionComponent) appOptions!: QueryList<AppOptionComponent>;
+
   searchTerm: string = '';
   filteredOptions: string[] = [];
 
   title: string = 'Hello, auto-complete-coreteq';
+
+  ngAfterContentInit() {
+    this.options = this.appOptions.toArray().map(option => option.value);
+  }
 
   onSearchChange(): void {
     if (this.disabled || this.loading) return;
@@ -46,4 +52,3 @@ export class AutocompleteComponent {
     this.filteredOptions = [];
   }
 }
-
