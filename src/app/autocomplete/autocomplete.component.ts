@@ -1,9 +1,9 @@
 import { Component, forwardRef, ContentChildren, EventEmitter, Input, Output, QueryList, TemplateRef, OnInit } from '@angular/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor, FormsModule} from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormsModule } from '@angular/forms';
 import { Subject, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { AppOptionComponent } from "./app-option/app-option.component";
-import {NgForOf, NgIf, NgTemplateOutlet} from "@angular/common";
+import { NgForOf, NgIf, NgTemplateOutlet } from "@angular/common";
 
 @Component({
   selector: 'app-autocomplete',
@@ -38,7 +38,8 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit {
   @ContentChildren(AppOptionComponent) appOptions!: QueryList<AppOptionComponent>;
 
   searchText: string = '';
-  filteredOptions: any[] = [];
+  filteredOptions: any[] = []; // Initialize as an empty array
+
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
@@ -53,19 +54,31 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit {
     );
 
     searchObservable.subscribe(options => {
-      this.filteredOptions = options;
+      this.filteredOptions = Array.isArray(options) ? options : []; // Ensure filteredOptions is always an array
     });
   }
 
   private filterAndSortOptions(searchText: string): any[] {
     let options = this.appOptions.toArray().map(option => option.value);
+    options = this.filterOptions(options, searchText); // Apply filtering
+    options = this.sortOptions(options); // Apply sorting
+    return options;
+  }
+
+  private filterOptions(options: any[], searchText: string): any[] {
     if (this.filterPredicate) {
-      options = options.filter(option => this.filterPredicate!(option, searchText));
+      return options.filter(option => this.filterPredicate!(option, searchText));
+    } else {
+      return options;
     }
+  }
+
+  private sortOptions(options: any[]): any[] {
     if (this.sortPredicate) {
-      options.sort(this.sortPredicate);
+      return options.sort(this.sortPredicate);
+    } else {
+      return options;
     }
-    return Array.isArray(options) ? options : [options];
   }
 
   selectOption(option: any): void {

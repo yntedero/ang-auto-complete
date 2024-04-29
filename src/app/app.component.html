@@ -1,11 +1,28 @@
 <app-autocomplete [loading]="loading"
-                  [minLengthSearch]="3"
-                  [debounceSearch]="500"
                   [filterPredicate]="filterPredicate"
                   [sortPredicate]="sortPredicate"
                   (search)="onSearch($event)"
-                  (dropdownOpenChange)="onDropdownOpen($event)">
+                  (dropdownOpenChange)="onDropdownOpen($event)"
+                  [minLengthSearch]="3"
+                  [debounceSearch]="500"
+                  [formControl]="controlName">
   <app-option value="1">Option 1</app-option>
   <app-option value="2">Option 2</app-option>
   <app-option value="3">Option 3</app-option>
+  <app-option value="4">
+    <ng-template let-value #customOption>
+      <div class="flex align-items-center gap-2">
+        <img src="assets/icon.svg" alt="icon">
+        <span>{{ value }}</span>
+      </div>
+    </ng-template>
+  </app-option>
+
+  <ng-template #loadingPlaceholder>
+    ...loading...
+  </ng-template>
+
+  <ng-template #emptyPlaceholder>
+    <div class="color-red">There are no options...</div>
+  </ng-template>
 </app-autocomplete>
