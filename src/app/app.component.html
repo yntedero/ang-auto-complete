@@ -1,5 +1,11 @@
-<app-autocomplete>
-  <app-option value="Apple"></app-option>
-  <app-option value="Banana"></app-option>
-  <app-option value="Cherry"></app-option>
+<app-autocomplete [loading]="loading"
+                  [minLengthSearch]="3"
+                  [debounceSearch]="500"
+                  [filterPredicate]="filterPredicate"
+                  [sortPredicate]="sortPredicate"
+                  (search)="onSearch($event)"
+                  (dropdownOpenChange)="onDropdownOpen($event)">
+  <app-option value="1">Option 1</app-option>
+  <app-option value="2">Option 2</app-option>
+  <app-option value="3">Option 3</app-option>
 </app-autocomplete>
