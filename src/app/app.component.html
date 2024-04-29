@@ -1,28 +1,31 @@
-<app-autocomplete [loading]="loading"
-                  [filterPredicate]="filterPredicate"
-                  [sortPredicate]="sortPredicate"
-                  (search)="onSearch($event)"
-                  (dropdownOpenChange)="onDropdownOpen($event)"
-                  [minLengthSearch]="3"
-                  [debounceSearch]="500"
-                  [formControl]="controlName">
-  <app-option value="1">Option 1</app-option>
-  <app-option value="2">Option 2</app-option>
-  <app-option value="3">Option 3</app-option>
-  <app-option value="4">
-    <ng-template let-value #customOption>
-      <div class="flex align-items-center gap-2">
-        <img src="assets/icon.svg" alt="icon">
-        <span>{{ value }}</span>
-      </div>
+<form [formGroup]="group" (ngSubmit)="submit()" style="display: flex; flex-direction: column; gap: 12px">
+  <app-autocomplete [loading]="loading"
+                    [filterPredicate]="filterPredicate"
+                    [sortPredicate]="sortPredicate"
+                    (search)="onSearch($event)"
+                    (dropdownOpenChange)="onDropdownOpen($event)"
+                    [minLengthSearch]="3"
+                    [debounceSearch]="500"
+                    formControlName="countryId"
+  >
+    <app-option value="id1">Bratislava</app-option>
+    <app-option value="id2">Option 2</app-option>
+    <app-option value="id3">Option 3</app-option>
+    <app-option value="id4">Almaty</app-option>
+
+    <ng-template #loadingPlaceholder>
+      ...loading...
     </ng-template>
-  </app-option>
 
-  <ng-template #loadingPlaceholder>
-    ...loading...
-  </ng-template>
+    <ng-template #emptyPlaceholder>
+      <div class="color-red">There are no options...</div>
+    </ng-template>
+  </app-autocomplete>
 
-  <ng-template #emptyPlaceholder>
-    <div class="color-red">There are no options...</div>
-  </ng-template>
-</app-autocomplete>
+  <p style="margin-top: 200px">
+    {{ group.valueChanges | async | json}}
+
+    <button type="submit">SUBMIT </button>
+  </p>
+
+</form>

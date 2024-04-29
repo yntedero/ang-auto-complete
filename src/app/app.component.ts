@@ -1,7 +1,8 @@
-import { Component, OnInit, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
-import { AutocompleteComponent } from "./autocomplete/autocomplete.component";
-import { AppOptionComponent } from "./autocomplete/app-option/app-option.component";
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import {Component, OnInit, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
+import {AutocompleteComponent} from "./autocomplete/autocomplete.component";
+import {AppOptionComponent} from "./autocomplete/app-option/app-option.component";
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {AsyncPipe, JsonPipe} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,24 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   imports: [
     AutocompleteComponent,
     ReactiveFormsModule,
-    AppOptionComponent
+    AppOptionComponent,
+    AsyncPipe,
+    JsonPipe
   ],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterContentInit {
   loading: boolean = false;
   searchText: string = '';
-  controlName = new FormControl();
+
+  control = new FormControl();
+
+  group = new FormGroup({
+    countryId: new FormControl(null),
+  })
+
+
   @ContentChildren(AppOptionComponent) appOptions!: QueryList<AppOptionComponent>;
-  options: { value: string, label: string }[] = [];
 
   ngOnInit(): void {
   }
@@ -41,5 +50,9 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
+  }
+
+  submit() {
+    console.log(this.group.value);
   }
 }
