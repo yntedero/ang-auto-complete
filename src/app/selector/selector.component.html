@@ -1,0 +1,12 @@
+<select [(ngModel)]="value" (change)="onSelect($event)">
+  <option value="" disabled [hidden]="value">Select the option</option>
+  <option *ngFor="let option of options" [value]="option.value"
+          [class.highlight]="option.highlight"
+          (mouseenter)="toggleHighlight(option, true)"
+          (mouseleave)="toggleHighlight(option, false)">
+    {{ option.content }}
+  </option>
+</select>
+<div *ngIf="value" class="option-details">
+  You have selected: {{ selectedOptionDetail }}
+</div>
