@@ -2,6 +2,20 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "autocomplete-lib": [
+        "./dist/autocomplete-lib"
+      ],
+      "selector-core-lib": [
+        "./dist/selector-core-lib"
+      ],
+      "selector-lib": [
+        "./dist/selector-lib"
+      ],
+      "selector-library": [
+        "./dist/selector-library"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

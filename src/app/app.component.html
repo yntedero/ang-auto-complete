@@ -1,9 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <app-selector formControlName="selectedOption">
-    <app-option value="1">Apple</app-option>
-    <app-option value="2">Orange</app-option>
-    <app-option value="3">Banana</app-option>
-    <app-option value="4">Citron</app-option>
+  <app-selector formControlName="selectedOption" (dropdownOpened)="handleDropdownOpened($event)">
+    <app-option value="1">Option 1</app-option>
+    <app-option value="2">Option 2</app-option>
+    <app-option value="3">Option 3</app-option>
+    <app-option value="4">Option 4</app-option>
   </app-selector>
   <button type="submit">Submit</button>
 </form>

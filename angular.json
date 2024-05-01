@@ -96,6 +96,138 @@
           }
         }
       }
+    },
+    "autocomplete-lib": {
+      "projectType": "library",
+      "root": "projects/autocomplete-lib",
+      "sourceRoot": "projects/autocomplete-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/autocomplete-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/autocomplete-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/autocomplete-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/autocomplete-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "selector-lib": {
+      "projectType": "library",
+      "root": "projects/selector-lib",
+      "sourceRoot": "projects/selector-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/selector-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/selector-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/selector-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/selector-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "selector-core-lib": {
+      "projectType": "library",
+      "root": "projects/selector-core-lib",
+      "sourceRoot": "projects/selector-core-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/selector-core-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/selector-core-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/selector-core-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/selector-core-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "selector-library": {
+      "projectType": "library",
+      "root": "projects/selector-library",
+      "sourceRoot": "projects/selector-library/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/selector-library/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/selector-library/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/selector-library/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/selector-library/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
