@@ -1,58 +1,25 @@
-import {Component, OnInit, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
-import {AutocompleteComponent} from "./autocomplete/autocomplete.component";
-import {AppOptionComponent} from "./autocomplete/app-option/app-option.component";
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {AsyncPipe, JsonPipe} from "@angular/common";
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AppOptionComponent } from './selector/app-option/app-option.component';
+import {SelectorComponent} from "./selector/selector.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  standalone: true,
+  styleUrls: ['./app.component.scss'],
   imports: [
-    AutocompleteComponent,
     ReactiveFormsModule,
     AppOptionComponent,
-    AsyncPipe,
-    JsonPipe
+    SelectorComponent
   ],
-  styleUrls: ['./app.component.scss']
+  standalone: true
 })
-export class AppComponent implements OnInit, AfterContentInit {
-  loading: boolean = false;
-  searchText: string = '';
-
-  control = new FormControl();
-
-  group = new FormGroup({
-    countryId: new FormControl(null),
-  })
-
-
-  @ContentChildren(AppOptionComponent) appOptions!: QueryList<AppOptionComponent>;
-
-  ngOnInit(): void {
-  }
-
-  filterPredicate(option: any, searchText: string): boolean {
-    return option && option.label && option.label.includes(searchText);
-  }
-
-  sortPredicate(a: any, b: any): number {
-    return a.label.localeCompare(b.label);
-  }
-
-  onSearch(event: string): void {
-    console.log('Search triggered:', event);
-  }
-
-  onDropdownOpen(open: boolean): void {
-    console.log('Dropdown open state:', open);
-  }
-
-  ngAfterContentInit(): void {
-  }
+export class AppComponent {
+  form = new FormGroup({
+    selectedOption: new FormControl() // Create a form control for the selected option
+  });
 
   submit() {
-    console.log(this.group.value);
+    console.log("Submitted option id: " + this.form.value.selectedOption); // Log the selected option id
   }
 }
