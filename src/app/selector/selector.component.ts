@@ -19,22 +19,22 @@ import { NgForOf, NgIf } from '@angular/common';
   standalone: true
 })
 
-export class SelectorComponent implements ControlValueAccessor, AfterContentInit {
+export class SelectorComponent implements ControlValueAccessor, AfterContentInit { // for two-way data binding
 
   @ContentChildren(AppOptionComponent) optionComponents!: QueryList<AppOptionComponent>;
 
-  public value: any = '';
+  public value: any = ''; // The current value of the selected option is none
   public selectedOptionDetail = '';
   options: any[] = [];
 
-  @Output() dropdownOpened = new EventEmitter<boolean>();
+  @Output() dropdownOpened = new EventEmitter<boolean>(); // Emits an event that informs about the opening/closing of the dropdown
 
   ngAfterContentInit() {
     this.options = this.optionComponents.map(optionComponent => ({
       value: optionComponent.value,
       content: optionComponent.content,
       highlight: false
-    })); // Map the option components to the options array
+    })); // Map the option components array to the options array
   }
 
   writeValue(value: any): void {
@@ -43,7 +43,7 @@ export class SelectorComponent implements ControlValueAccessor, AfterContentInit
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn; // Save the function
+    this.onChange = fn; // Save the function to call when the value changes 'fn'
   }
 
   registerOnTouched(fn: any): void {}
@@ -59,13 +59,13 @@ export class SelectorComponent implements ControlValueAccessor, AfterContentInit
   }
 
   private updateSelectedOptionDetail(): void {
-    const selectedOption = this.options.find(option => option.value === this.value);
+    const selectedOption = this.options.find(option => option.value === this.value); // Find the selected option by current value
     if (selectedOption) {
       this.selectedOptionDetail = selectedOption.content;
     } else {
-      this.selectedOptionDetail = ''; // Clear the selected option detail if the value is not found
+      this.selectedOptionDetail = '';
     }
   }
 
-  private onChange: Function = () => {}; // The function to call when the value changes
+  private onChange: Function = () => {}; // The function to callback when the value changes
 }
